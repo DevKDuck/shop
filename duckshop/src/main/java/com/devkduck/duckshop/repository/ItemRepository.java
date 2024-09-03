@@ -3,11 +3,12 @@ package com.devkduck.duckshop.repository;
 import com.devkduck.duckshop.entity.Item;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface ItemRepository extends JpaRepository<Item, Long> {
+public interface ItemRepository extends JpaRepository<Item, Long>, QuerydslPredicateExecutor<Item>{
 
 //      인자값으로 들어온 상품명 찾기
       List<Item> findByItemNm(String itemNm);
@@ -28,4 +29,6 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
     //nativeQuery를 이용하여 검색
     @Query(value="select * from item i where i.item_detail like %:itemDetail% order by i.price desc", nativeQuery = true)
     List<Item> findByItemDetailNative(@Param("itemDetail") String itemDetail);
+
 }
+
