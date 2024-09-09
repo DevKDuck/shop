@@ -12,7 +12,7 @@ import java.util.UUID;
 @Service
 @Log
 public class FileService {
-    public String upload(String uploadPath, String originalFilename, byte[] fileData) throws Exception{
+    public String uploadFile(String uploadPath, String originalFilename, byte[] fileData) throws Exception{
         UUID uuid = UUID.randomUUID();
         String extension = originalFilename.substring(originalFilename.lastIndexOf("."));
         String savedFileName = uuid.toString() + extension;
