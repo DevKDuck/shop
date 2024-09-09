@@ -3,6 +3,7 @@ package com.devkduck.duckshop.entity;
 import com.devkduck.duckshop.constant.ItemSellStatus;
 import com.devkduck.duckshop.repository.ItemRepository;
 import com.devkduck.duckshop.repository.MemberRepository;
+import com.devkduck.duckshop.repository.OrderItemRepository;
 import com.devkduck.duckshop.repository.OrderRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityNotFoundException;
@@ -98,5 +99,24 @@ public class OrderTest {
         Order order = this.createOrder();
         order.getOrderItems().remove(0);
         em.flush();
+    }
+
+    @Autowired
+    OrderItemRepository orderItemRepository;
+
+    @Test
+    @DisplayName("지연 로딩 테스트")
+    void lazyLoadingTest(){
+        Order order = this.createOrder();
+        Long orderItemId = order.getOrderItems().get(0).getId();
+        em.flush();
+        em.clear();
+
+        OrderItem orderItem = orderItemRepository.findById(orderItemId)
+                .orElseThrow(EntityNotFoundException::new);
+        System.out.println("Order class: + " + orderItem.getOrder().getClass());
+        System.out.println("================================");
+        orderItem.getOrder().getOrderDate();
+        System.out.println("================================");
     }
 }
