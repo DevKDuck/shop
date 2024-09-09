@@ -30,7 +30,7 @@ public class Order {
     private OrderStatus orderStatus;
 
     //주인이 아닌 연관 관계 매핑, orderItem이 주인이고 order에 의해 관리
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> orderItems = new ArrayList<>();
 
     private LocalDateTime regTime;
