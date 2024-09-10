@@ -2,6 +2,7 @@ package com.devkduck.duckshop.service;
 
 import com.devkduck.duckshop.dto.ItemFormDto;
 import com.devkduck.duckshop.dto.ItemImgDto;
+import com.devkduck.duckshop.dto.ItemSearchDto;
 import com.devkduck.duckshop.entity.Item;
 import com.devkduck.duckshop.entity.ItemImg;
 import com.devkduck.duckshop.repository.ItemImgRepository;
@@ -9,6 +10,8 @@ import com.devkduck.duckshop.repository.ItemRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -70,5 +73,8 @@ public class ItemService {
         }
 
         return item.getId();
+    }
+    public Page<Item> getAdminItemPage(ItemSearchDto itemSearchDto, Pageable pageable){
+        return itemRepository.getAdminItemPage(itemSearchDto, pageable);
     }
 }
