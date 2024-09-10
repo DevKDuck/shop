@@ -1,15 +1,18 @@
 package com.devkduck.duckshop.service;
 
 import com.devkduck.duckshop.dto.ItemFormDto;
+import com.devkduck.duckshop.dto.ItemImgDto;
 import com.devkduck.duckshop.entity.Item;
 import com.devkduck.duckshop.entity.ItemImg;
 import com.devkduck.duckshop.repository.ItemImgRepository;
 import com.devkduck.duckshop.repository.ItemRepository;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -36,5 +39,20 @@ public class ItemService {
             itemImgService.saveItemImg(itemImg,itemImgFileList.get(i)); //상품 이미지 정보 저장
         }
         return item.getId();
+    }
+
+    public ItemFormDto getItemDtl(Long itemId){
+        List<ItemImg> itemImgList = itemImgRepository.findByItemIdOrderByIdAsc(itemId);
+        List<ItemImgDto> itemImgDtoList = new ArrayList<>();
+        for (ItemImg itemImg : itemImgList) {
+            ItemImgDto itemImgDto = ItemImgDto.of(itemImg);
+            itemImgDtoList.add(itemImgDto);
+        }
+
+        Item item = itemRepository.findById(itemId)
+                .orElseThrow(EntityNotFoundException::new);
+        ItemFormDto itemFormDto = ItemFormDto.of(item);
+        itemFormDto.setItemImgDtoList(itemImgDtoList);
+        return itemFormDto;
     }
 }
