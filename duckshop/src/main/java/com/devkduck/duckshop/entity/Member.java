@@ -14,7 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Getter
 @Setter
 @ToString
-public class Member {
+public class Member extends BaseEntity{
 
     @Id
     @Column(name="member_id")
@@ -39,7 +39,8 @@ public class Member {
         member.setAddress(memberFormDto.getAddress());
         String password = passwordEncoder.encode(memberFormDto.getPassword()); //BCryPasswordEncoder Bean 을 파라미터로 넘겨 비밀번호 암호화
         member.setPassword(password);
-        member.setRole(Role.USER);
+//        member.setRole(Role.USER);
+        member.setRole(Role.ADMIN); //유저 -> 관리자 테스트
         return member;
 
     }
