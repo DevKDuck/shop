@@ -3,6 +3,7 @@ package com.devkduck.duckshop.service;
 import com.devkduck.duckshop.dto.ItemFormDto;
 import com.devkduck.duckshop.dto.ItemImgDto;
 import com.devkduck.duckshop.dto.ItemSearchDto;
+import com.devkduck.duckshop.dto.MainItemDto;
 import com.devkduck.duckshop.entity.Item;
 import com.devkduck.duckshop.entity.ItemImg;
 import com.devkduck.duckshop.repository.ItemImgRepository;
@@ -76,5 +77,9 @@ public class ItemService {
     }
     public Page<Item> getAdminItemPage(ItemSearchDto itemSearchDto, Pageable pageable){
         return itemRepository.getAdminItemPage(itemSearchDto, pageable);
+    }
+
+    public Page<MainItemDto> getMainItemPage(ItemSearchDto itemSearchDto, Pageable pageable){
+        return itemRepository.getMainItemPage(itemSearchDto, pageable);
     }
 }
