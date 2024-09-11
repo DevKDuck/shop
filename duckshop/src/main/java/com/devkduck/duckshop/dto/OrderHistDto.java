@@ -25,4 +25,8 @@ public class OrderHistDto {
         this.orderDate = order.getOrderDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
         this.orderStatus = order.getOrderStatus();
     }
+
+    public void addOrderItem(OrderItemDto orderItemDto){
+        orderItemDtoList.add(orderItemDto);
+    }
 }
