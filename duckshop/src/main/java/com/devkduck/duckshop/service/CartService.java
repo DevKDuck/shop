@@ -2,6 +2,8 @@ package com.devkduck.duckshop.service;
 
 import com.devkduck.duckshop.dto.CartDetailDto;
 import com.devkduck.duckshop.dto.CartItemDto;
+import com.devkduck.duckshop.dto.CartOrderDto;
+import com.devkduck.duckshop.dto.OrderDto;
 import com.devkduck.duckshop.entity.Cart;
 import com.devkduck.duckshop.entity.CartItem;
 import com.devkduck.duckshop.entity.Item;
@@ -27,6 +29,7 @@ public class CartService {
     private final CartItemRepository cartItemRepository;
     private final ItemRepository itemRepository;
     private final MemberRepository memberRepository;
+    private final OrderService orderService;
 
     public Long addCart(CartItemDto cartItemDto, String email) {
 
@@ -99,6 +102,38 @@ public class CartService {
                 .orElseThrow(EntityNotFoundException::new);
 
         cartItem.updateCount(count);
+    }
+
+    public void deleteCartItem(Long cartItemId){
+        CartItem cartItem = cartItemRepository.findById(cartItemId)
+                .orElseThrow(EntityNotFoundException::new);
+        cartItemRepository.delete(cartItem);
+    }
+
+    public Long orderCartItem(List<CartOrderDto> cartOrderDtoList, String email){
+        List<OrderDto> orderDtoList = new ArrayList<>();
+
+        for (CartOrderDto cartOrderDto : cartOrderDtoList) {
+            CartItem cartItem = cartItemRepository
+                    .findById(cartOrderDto.getCartItemId())
+                    .orElseThrow(EntityNotFoundException::new);
+
+            OrderDto orderDto = new OrderDto();
+            orderDto.setItemId(cartItem.getItem().getId());
+            orderDto.setCount(cartItem.getCount());
+            orderDtoList.add(orderDto);
+        }
+
+        Long orderId = orderService.orders(orderDtoList, email);
+        for (CartOrderDto cartOrderDto : cartOrderDtoList) {
+            CartItem cartItem = cartItemRepository
+                    .findById(cartOrderDto.getCartItemId())
+                    .orElseThrow(EntityNotFoundException::new);
+            //주문 후 장바구니에서 제거
+            cartItemRepository.delete(cartItem);
+        }
+
+        return orderId;
     }
 
 }
