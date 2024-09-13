@@ -62,7 +62,7 @@ jobs:
           app-name: 'duckshop'
           slot-name: 'Production'
           package: '*.jar'
-       env:
+        env:
           DB_USER: ${{ secrets.DB_USER }}
           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
           
