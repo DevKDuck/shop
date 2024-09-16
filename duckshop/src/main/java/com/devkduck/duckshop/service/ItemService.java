@@ -27,7 +27,11 @@ public class ItemService {
     private final ItemImgService itemImgService;
     private final ItemImgRepository itemImgRepository;
 
+    private final AzureBlobService azureBlobService;
+
     public Long saveItem(ItemFormDto itemFormDto, List<MultipartFile> itemImgFileList) throws Exception {
+
+        azureBlobService.uploadFile(itemImgFileList.get(0));
 
         //상품 등록
         Item item = itemFormDto.createItem();
