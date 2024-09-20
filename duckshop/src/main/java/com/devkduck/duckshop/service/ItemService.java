@@ -31,8 +31,6 @@ public class ItemService {
 
     public Long saveItem(ItemFormDto itemFormDto, List<MultipartFile> itemImgFileList) throws Exception {
 
-        azureBlobService.uploadFile(itemImgFileList.get(0));
-
         //상품 등록
         Item item = itemFormDto.createItem();
         itemRepository.save(item);
@@ -44,6 +42,7 @@ public class ItemService {
                 itemImg.setRepimgYn("Y");
             else
                 itemImg.setRepimgYn("N");
+
             itemImgService.saveItemImg(itemImg,itemImgFileList.get(i)); //상품 이미지 정보 저장
         }
         return item.getId();
