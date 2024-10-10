@@ -27,6 +27,8 @@ public class ItemService {
     private final ItemImgService itemImgService;
     private final ItemImgRepository itemImgRepository;
 
+    private final AzureBlobService azureBlobService;
+
     public Long saveItem(ItemFormDto itemFormDto, List<MultipartFile> itemImgFileList) throws Exception {
 
         //상품 등록
@@ -40,6 +42,7 @@ public class ItemService {
                 itemImg.setRepimgYn("Y");
             else
                 itemImg.setRepimgYn("N");
+
             itemImgService.saveItemImg(itemImg,itemImgFileList.get(i)); //상품 이미지 정보 저장
         }
         return item.getId();
