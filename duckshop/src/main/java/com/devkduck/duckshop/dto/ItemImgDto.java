@@ -1,6 +1,8 @@
 package com.devkduck.duckshop.dto;
 
 import com.devkduck.duckshop.entity.ItemImg;
+import jakarta.persistence.Column;
+import jakarta.validation.constraints.Max;
 import lombok.Getter;
 import lombok.Setter;
 import org.modelmapper.ModelMapper;
@@ -13,10 +15,12 @@ import org.modelmapper.ModelMapper;
 public class ItemImgDto {
     private Long id;
 
+    @Column(length = 1024)
     private String imgName;
 
     private String oriImgName;
 
+    @Column(length = 1024)
     private String imgUrl;
 
     private String repImgYn;
