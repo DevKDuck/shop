@@ -30,7 +30,7 @@ jobs:
       
       # 프로젝트 경로로 이동
       - name: Change directory to duckshop
-        run: cd duckshop
+        working-directory: ./shop/duckshop
       
       # Maven 빌드 명령어 실행 (Gradle 대신 Maven 사용)
       - name: Build with Maven
