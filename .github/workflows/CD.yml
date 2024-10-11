@@ -9,7 +9,7 @@ on:
 # 해당 yml 내에서 사용할 key - value
 env:
   S3_BUCKET_NAME: duckshop-bucket
-  PROJECT_NAME: DuckShop
+  PROJECT_NAME: duckshop
 
 # workflow는 한 개 이상의 job을 가지며, 각 job은 여러 step에 따라 단계를 나눌 수 있습니다.
 jobs:
@@ -57,7 +57,7 @@ jobs:
       - name: Deploy
         run: |
           aws deploy create-deployment \
-            --application-name DuckShop \
+            --application-name duckshop \
             --deployment-config-name CodeDeployDefault.AllAtOnce \
             --deployment-group-name duckshop-cicd-prod \
             --file-exists-behavior OVERWRITE \
