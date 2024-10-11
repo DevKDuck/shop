@@ -23,6 +23,10 @@ jobs:
         java-version: '17'
         distribution: 'corretto'
 
+     # 프로젝트 경로로 이동
+    - name: Change directory to duckshop
+      run: cd duckshop
+
     - name: Build with Maven
       run: mvn clean install
       shell: bash
