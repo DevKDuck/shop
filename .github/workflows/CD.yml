@@ -52,3 +52,14 @@ jobs:
       # S3에 압축된 JAR 파일 업로드
       - name: Upload to S3
         run: aws s3 cp --region ap-northeast-2 ./duckshop_$GITHUB_SHA.zip s3://$S3_BUCKET_NAME/$PROJECT_NAME/$GITHUB_SHA.zip
+      
+      # Deploy
+      - name: Deploy
+        run: |
+          aws deploy create-deployment \
+            --application-name DuckShop \
+            --deployment-config-name CodeDeployDefault.AllAtOnce \
+            --deployment-group-name duckshop-cicd-prod \
+            --file-exists-behavior OVERWRITE \
+            --s3-location bucket=$S3_BUCKET_NAME,bundleType=zip,key=$PROJECT_NAME/$GITHUB_SHA.zip \
+            --region ap-northeast-2
