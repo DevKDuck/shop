@@ -31,15 +31,15 @@ jobs:
       # Maven 빌드 명령어 실행 (Gradle 대신 Maven 사용)
       - name: Build with Maven
         run: mvn clean package
-        working-directory: ./shop/duckshop
+        working-directory: ./duckshop  # 올바른 경로로 수정
       
       # 빌드된 JAR 파일이 있는 target 경로로 이동
       - name: Move to target directory
-        run: ls ./shop/duckshop/target
+        run: ls ./duckshop/target
 
       # JAR 파일을 압축합니다.
       - name: Make zip file
-        run: zip -r ./duckshop_$GITHUB_SHA.zip ./shop/duckshop/target/shop-0.0.1-SNAPSHOT.jar
+        run: zip -r ./duckshop_$GITHUB_SHA.zip ./duckshop/target/shop-0.0.1-SNAPSHOT.jar
 
       # AWS 자격증명 설정
       - name: Configure AWS credentials
@@ -51,4 +51,4 @@ jobs:
           
       # S3에 압축된 JAR 파일 업로드
       - name: Upload to S3
-        run: aws s
+        run: aws s3 cp --region ap-northeast-2 ./duckshop_$GITHUB_SHA.zip s3://$S3_BUCKET_NAME/$PROJECT_NAME/$GITHUB_SHA.zip
