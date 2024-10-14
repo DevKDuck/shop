@@ -13,12 +13,4 @@ public class DuckshopApplication {
 		SpringApplication.run(DuckshopApplication.class, args);
 	}
 
-	@GetMapping("/test")
-	public UserDto test(){
-		UserDto duck = new UserDto();
-		duck.setAge(30);
-		duck.setName("DevKducK");
-		return duck;
-	}
-
 }
