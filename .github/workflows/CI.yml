@@ -28,3 +28,8 @@ jobs:
       run: mvn clean install
       shell: bash
       working-directory: ./duckshop  # duckshop 경로로 설정
+
+     # MySQL 관련 환경변수 설정
+    - name: Set environment variables for MySQL
+      run: echo "SPRING_DATASOURCE_USERNAME=${{ secrets.SPRING_DATASOURCE_USERNAME }}" >> $GITHUB_ENV
+      run: echo "SPRING_DATASOURCE_PASSWORD=${{ secrets.SPRING_DATASOURCE_PASSWORD }}" >> $GITHUB_ENV
