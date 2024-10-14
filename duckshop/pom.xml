@@ -111,17 +111,6 @@
 			<scope>test</scope>
 		</dependency>
 
-<!--		<dependency>-->
-<!--			<groupId>com.microsoft.sqlserver</groupId>-->
-<!--			<artifactId>mssql-jdbc</artifactId>-->
-<!--			<version>12.8.1.jre11</version>-->
-<!--		</dependency>-->
-
-<!--		<dependency>-->
-<!--			<groupId>com.azure</groupId>-->
-<!--			<artifactId>azure-storage-blob</artifactId>-->
-<!--			<version>12.15.0</version>-->
-<!--		</dependency>-->
 
 		<dependency>
 			<groupId>io.projectreactor</groupId>
