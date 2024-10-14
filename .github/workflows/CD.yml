@@ -68,5 +68,6 @@ jobs:
             --region ap-northeast-2
       # 환경 변수 추가
       - name: Set environment variables for MySQL
-        run: echo "SPRING_DATASOURCE_USERNAME=${{ secrets.SPRING_DATASOURCE_USERNAME }}" >> $GITHUB_ENV
-        run: echo "SPRING_DATASOURCE_PASSWORD=${{ secrets.SPRING_DATASOURCE_PASSWORD }}" >> $GITHUB_ENV
+        run:
+          echo "SPRING_DATASOURCE_USERNAME=${{ secrets.SPRING_DATASOURCE_USERNAME }}" >> $GITHUB_ENV
+          echo "SPRING_DATASOURCE_PASSWORD=${{ secrets.SPRING_DATASOURCE_PASSWORD }}" >> $GITHUB_ENV
