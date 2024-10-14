@@ -10,6 +10,9 @@ on:
 env:
   S3_BUCKET_NAME: duckshop-bucket
   PROJECT_NAME: duckshop
+  SPRING_DATASOURCE_USERNAME: ${{ secrets.SPRING_DATASOURCE_USERNAME }}
+  SPRING_DATASOURCE_PASSWORD: ${{ secrets.SPRING_DATASOURCE_PASSWORD }}
+
 
 # workflow는 한 개 이상의 job을 가지며, 각 job은 여러 step에 따라 단계를 나눌 수 있습니다.
 jobs:
