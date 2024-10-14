@@ -23,12 +23,13 @@ jobs:
         java-version: '17'
         distribution: 'corretto'
 
-     # 프로젝트 경로로 이동하지 않고 working-directory 설정
+    # 프로젝트 경로로 이동하지 않고 working-directory 설정
     - name: Build with Maven
-      run: mvn clean package
+      run: mvn clean install
       working-directory: ./duckshop  # duckshop 경로로 설정
 
-     # MySQL 관련 환경변수 설정
+    # 환경 변수 추가
     - name: Set environment variables for MySQL
-      run: echo "SPRING_DATASOURCE_USERNAME=${{ secrets.SPRING_DATASOURCE_USERNAME }}" >> $GITHUB_ENV
-      run: echo "SPRING_DATASOURCE_PASSWORD=${{ secrets.SPRING_DATASOURCE_PASSWORD }}" >> $GITHUB_ENV
+      run: |
+        echo "SPRING_DATASOURCE_USERNAME=${{ secrets.SPRING_DATASOURCE_USERNAME }}" >> $GITHUB_ENV
+        echo "SPRING_DATASOURCE_PASSWORD=${{ secrets.SPRING_DATASOURCE_PASSWORD }}" >> $GITHUB_ENV
