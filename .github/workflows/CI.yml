@@ -25,8 +25,7 @@ jobs:
 
      # 프로젝트 경로로 이동하지 않고 working-directory 설정
     - name: Build with Maven
-      run: mvn clean install
-      shell: bash
+      run: mvn clean package
       working-directory: ./duckshop  # duckshop 경로로 설정
 
      # MySQL 관련 환경변수 설정
