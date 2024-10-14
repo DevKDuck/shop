@@ -26,7 +26,7 @@ jobs:
     # 프로젝트 경로로 이동하지 않고 working-directory 설정
     - name: Build with Maven
       run: mvn clean package
-      working-directory: ./shop/duckshop
+      working-directory: ./duckshop
 
     # 환경 변수 추가
     - name: Set environment variables for MySQL
