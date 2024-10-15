@@ -2,7 +2,7 @@ version: 0.0
 os: linux
 # S3에 있는 zip 파일이 EC2에 배포될 위치를 지정
 files:
-  - source: /duckshop/target/shop-0.0.1-SNAPSHOT.jar
+  - source: /shop/duckshop/target/shop-0.0.1-SNAPSHOT.jar
     destination: /home/ec2-user/shop/duckshop/target # source에서 지정된 파일을 받을 위치, 이후 jar를 실행하는 등은 destination에서 옮긴 파일들로 진행
     overwrite: yes
  
