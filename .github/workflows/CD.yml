@@ -61,3 +61,9 @@ jobs:
             --file-exists-behavior OVERWRITE \
             --s3-location bucket=$S3_BUCKET_NAME,bundleType=zip,key=$PROJECT_NAME/$GITHUB_SHA.zip \
             --region ap-northeast-2
+
+      # 환경 변수 추가
+      - name: Set environment variables for MySQL
+        run:
+          echo "SPRING_DATASOURCE_USERNAME=${{ secrets.SPRING_DATASOURCE_USERNAME }}" >> $GITHUB_ENV
+          echo "SPRING_DATASOURCE_PASSWORD=${{ secrets.SPRING_DATASOURCE_PASSWORD }}" >> $GITHUB_ENV
